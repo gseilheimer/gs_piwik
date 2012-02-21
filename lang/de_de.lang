@@ -1,0 +1,27 @@
+# addon:piwik de_de | de_de_utf8
+
+addon_name = Piwik
+
+addon_subpage_readme = Lies mich
+
+addon_subpage_readme_txt_01 = Piwik - minimaler Aufwand...
+addon_subpage_readme_txt_01_01 = Es sind keine externen Dateien einzubinden. Lediglich ist das Tempalte mit der ID=622 ensprechend anzupassen. Ein einfaches Copy'n'Paste vom PIWIK-Backend ist genug...
+
+addon_subpage_readme_txt_02 = Piwik - JS-Funktionen
+addon_subpage_readme_txt_02_01 = SCRIPT-Tag-1: URL ...
+addon_subpage_readme_txt_02_02 = var pkBaseURL = ... [hier sind die beiden URLs des SERVERs einzutragen: http://... & https://...]
+addon_subpage_readme_txt_02_03 = SCRIPT-Tag-2: try { ... } catch (err) {...} 
+addon_subpage_readme_txt_02_04 = var piwikTracker = ... [hier ist die ID der Tracking-Website von PIWIK einzutragen]
+addon_subpage_readme_txt_02_05 = Das waren die wesentlichen Funktionen. Auf das NOSCRIPT-Tag sollte verzichtet werderden beim Copy'n'Paste.
+
+addon_subpage_readme_txt_03 = Hinweise: PIWIK-Konfiguration
+addon_subpage_readme_txt_03_01 = Sie brauchen nur die obigen Schritte durchzuführen... 
+addon_subpage_readme_txt_03_02 = FRAGEN zu den LINKDATEN (URLs)...???
+addon_subpage_readme_txt_03_03 = a) diese Daten bekommen Sie von Ihrem Anbieter, sofern dieser PIWIK eingerichtet hat.
+addon_subpage_readme_txt_03_04 = b) weitere Details zu PIWIK finden Sie unter: http://www.piwik.org
+
+addon_subpage_readme_txt_04 = Hinweise: Template löschen
+addon_subpage_readme_txt_04_01 = Das Löschen des Templates mit der ID=622 sollte nur durch die DEINSTALLATION des AddOns erfolgen.
+
+addon_subpage_readme_txt_05 = Hinweise: Installation/Einbindung des REX_TEMPLATE[622]
+addon_subpage_readme_txt_05_01 = Das Template ist noch im HEAD-Tag des Standard-Artikels zu hinterlegen...
