@@ -36,16 +36,16 @@
 	$REX['ADDON']['perm'][$addon_name] 			= 'piwik[1]';
 	
 	// Credits
-	$REX['ADDON']['version'][$addon_name] 		= '1.6';
+	$REX['ADDON']['version'][$addon_name] 		= '1.9';
 	$REX['ADDON']['author'][$addon_name] 		= 'Gilbert Seilheimer';
 	$REX['ADDON']['supportpage'][$addon_name] 	= 'forum.redaxo.org';
 	
 	// *************
-	$REX['PERM'][] = 'piwik[1]';
-	$REX['PERM'][] = 'piwik[2]';
+	#$REX['PERM'][] = 'piwik[1]';
+	#$REX['PERM'][] = 'piwik[2]';
 	
 	// Fuer Benutzervewaltung
-	$REX['EXTPERM'][] = 'piwik[3]';
+	#$REX['EXTPERM'][] = 'piwik[3]';
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// SUBPAGES
