@@ -4,9 +4,9 @@
 #
 # Autor: 	G.Seilheimer
 # Company:	contic.de
-# Version: 	1.9
-# Update:	2013-03-09
-# CMS:		Redaxo 4.5
+# Version: 	1.0.9
+# Update:	2013-03-21
+# CMS:		Redaxo 4.4.1
 #
 #*********************************************
 
@@ -17,4 +17,4 @@
 #
 #*********************************************
 
-DELETE FROM `%TABLE_PREFIX%template` WHERE `id`=622 LIMIT 1;
+DELETE FROM `%TABLE_PREFIX%template` WHERE `name` LIKE '%gs : piwik (jquery)%' LIMIT 1;
