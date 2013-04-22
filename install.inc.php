@@ -25,7 +25,7 @@
 	$page = "gs_piwik";
 
    // Installationsbedingungen pruefen
-   $page_check_rex = '4.4.1';
+   $page_check_rex = '4.5';
    $page_check_php = 5;
    #$page_check_addons = array('');
    $page_check_status = true;
