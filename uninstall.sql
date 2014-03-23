@@ -17,4 +17,4 @@
 #
 #*********************************************
 
-DELETE FROM `%TABLE_PREFIX%template` WHERE `name` LIKE '%gs : piwik (jquery)%' LIMIT 1;
+DELETE FROM `%TABLE_PREFIX%template` WHERE `name` LIKE '%addon gs_piwik (jquery)%' LIMIT 1;
