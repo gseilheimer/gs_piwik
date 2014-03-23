@@ -86,30 +86,29 @@
    $sql_table = $REX['TABLE_PREFIX']."template";
 
    $sql = rex_sql::factory();
-   $sql->debugsql = 0; //Ausgabe Query
+   $sql->debugsql = 1; //Ausgabe Query
    $sql->setQuery("SELECT * FROM $sql_table WHERE name LIKE '%gs : piwik (jquery)%'");
    $sql_id = $sql->getValue('id');
    $sql->setTable($sql_table);
 
    if( $sql->getRows() )
    {
-      $sql->setWhere('id = '.intval($sql_id));
+      $sql->setWhere('id = '.$sql_id);
       $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n   var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://SRV.DOMAIN.TLD\" : \"http://SRV.DOMAIN.TLD/\");\r\n   document.write(unescape(\"%3Cscript src=\'\" + pkBaseURL + \"piwik.js\' type=\'text/javascript\'%3E%3C/script%3E\"));\r\n</script>\r\n\r\n<script type=\"text/javascript\">\r\n\r\nvar domain_website = window.location.hostname;\r\nvar id_website = PIWIK-ID; //Konstante oder automatisch fuer MultiDomain-Support\r\n\r\nif (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 1;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\")\r\n {\r\n   id_website = 2;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 3;\r\n}\r\n\r\ntry {\r\n   var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", id_website);\r\n   piwikTracker.trackPageView();\r\n   piwikTracker.enableLinkTracking();\r\n} \r\ncatch( err ) \r\n{\r\n}\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
-      $sql->update();
 
       if ( $sql->update() )
       {
-         echo 'Zeile mit id '.intval($id).' erfolgreich aktuallisiert.';
+         echo 'Zeile mit id '.$sql_id.' erfolgreich aktuallisiert.';
       }
    }
    else
    {
       $sql->setValue("name", "gs : piwik (jquery)");
       $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n   var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://SRV.DOMAIN.TLD\" : \"http://SRV.DOMAIN.TLD/\");\r\n   document.write(unescape(\"%3Cscript src=\'\" + pkBaseURL + \"piwik.js\' type=\'text/javascript\'%3E%3C/script%3E\"));\r\n</script>\r\n\r\n<script type=\"text/javascript\">\r\n\r\nvar domain_website = window.location.hostname;\r\nvar id_website = PIWIK-ID; //Konstante oder automatisch fuer MultiDomain-Support\r\n\r\nif (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 1;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\")\r\n {\r\n   id_website = 2;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 3;\r\n}\r\n\r\ntry {\r\n   var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", id_website);\r\n   piwikTracker.trackPageView();\r\n   piwikTracker.enableLinkTracking();\r\n} \r\ncatch( err ) \r\n{\r\n}\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
-      $sql->insert();
+
       if ( $sql->insert() )
       {
-         echo 'Zeile mit id '.intval($id).' erfolgreich eingetragen.';
+         echo 'Zeile mit id '.$sql_id.' erfolgreich eingetragen.';
       }
    }
 
