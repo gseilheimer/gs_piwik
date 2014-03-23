@@ -86,7 +86,7 @@
    $sql_table = $REX['TABLE_PREFIX']."template";
 
    $sql = rex_sql::factory();
-   $sql->debugsql = 1; //Ausgabe Query
+   $sql->debugsql = 0; //Ausgabe Query
    $sql->setQuery("SELECT * FROM $sql_table WHERE name LIKE '%gs : piwik (jquery)%'");
    $sql_id = $sql->getValue('id');
    $sql->setTable($sql_table);
