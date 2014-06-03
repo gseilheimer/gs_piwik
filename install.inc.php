@@ -86,7 +86,7 @@
    $sql_table = $REX['TABLE_PREFIX']."template";
 
    $sql = rex_sql::factory();
-   $sql->debugsql = 1; //Ausgabe Query
+   $sql->debugsql = 0; //Ausgabe Query
    $sql->setQuery("SELECT * FROM $sql_table WHERE name LIKE '%addon gs_piwik (jquery)%'");
    $sql_id = $sql->getValue('id');
    $sql->setTable($sql_table);
@@ -94,7 +94,7 @@
    if( $sql->getRows() )
    {
       $sql->setWhere('id = '.$sql_id);
-      $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n   var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://SRV.DOMAIN.TLD\" : \"http://SRV.DOMAIN.TLD/\");\r\n   document.write(unescape(\"%3Cscript src=\'\" + pkBaseURL + \"piwik.js\' type=\'text/javascript\'%3E%3C/script%3E\"));\r\n</script>\r\n\r\n<script type=\"text/javascript\">\r\n\r\nvar domain_website = window.location.hostname;\r\nvar id_website = PIWIK-ID; //Konstante oder automatisch fuer MultiDomain-Support\r\n\r\nif (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 1;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\")\r\n {\r\n   id_website = 2;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 3;\r\n}\r\n\r\ntry {\r\n   var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", id_website);\r\n   piwikTracker.trackPageView();\r\n   piwikTracker.enableLinkTracking();\r\n} \r\ncatch( err ) \r\n{\r\n}\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
+      $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n\r\n  var piwik_site_id = Z;\r\n  var piwik_site_url = \"SRV.DOMAIN.TLD\"\r\n\r\n  var _paq = _paq || [];\r\n  _paq.push([\'trackPageView\']);\r\n  _paq.push([\'enableLinkTracking\']);\r\n  (function() {\r\n    var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://\" + piwik_site_url +\"/\";\r\n    _paq.push([\'setTrackerUrl\', u+\'piwik.php\']);\r\n    _paq.push([\'setSiteId\', piwik_site_id]);\r\n    var d=document, g=d.createElement(\'script\'), s=d.getElementsByTagName(\'script\')[0]; g.type=\'text/javascript\';\r\n    g.defer=true; g.async=true; g.src=u+\'piwik.js\'; s.parentNode.insertBefore(g,s);\r\n  })();\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
 
       if ( $sql->update() )
       {
@@ -103,8 +103,8 @@
    }
    else
    {
-      $sql->setValue("name", "gs : piwik (jquery)");
-      $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n   var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://SRV.DOMAIN.TLD\" : \"http://SRV.DOMAIN.TLD/\");\r\n   document.write(unescape(\"%3Cscript src=\'\" + pkBaseURL + \"piwik.js\' type=\'text/javascript\'%3E%3C/script%3E\"));\r\n</script>\r\n\r\n<script type=\"text/javascript\">\r\n\r\nvar domain_website = window.location.hostname;\r\nvar id_website = PIWIK-ID; //Konstante oder automatisch fuer MultiDomain-Support\r\n\r\nif (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 1;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\")\r\n {\r\n   id_website = 2;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") \r\n{\r\n   id_website = 3;\r\n}\r\n\r\ntry {\r\n   var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", id_website);\r\n   piwikTracker.trackPageView();\r\n   piwikTracker.enableLinkTracking();\r\n} \r\ncatch( err ) \r\n{\r\n}\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
+      $sql->setValue("name", "addon gs_piwik (jquery)");
+      $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n\r\n  var piwik_site_id = Z;\r\n  var piwik_site_url = \"SRV.DOMAIN.TLD\"\r\n\r\n  var _paq = _paq || [];\r\n  _paq.push([\'trackPageView\']);\r\n  _paq.push([\'enableLinkTracking\']);\r\n  (function() {\r\n    var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://\" + piwik_site_url +\"/\";\r\n    _paq.push([\'setTrackerUrl\', u+\'piwik.php\']);\r\n    _paq.push([\'setSiteId\', piwik_site_id]);\r\n    var d=document, g=d.createElement(\'script\'), s=d.getElementsByTagName(\'script\')[0]; g.type=\'text/javascript\';\r\n    g.defer=true; g.async=true; g.src=u+\'piwik.js\'; s.parentNode.insertBefore(g,s);\r\n  })();\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
 
       if ( $sql->insert() )
       {
