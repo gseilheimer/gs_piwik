@@ -1,8 +1,7 @@
 <?php
 
 /**
- * PIWIK
- *
+ * gs_piwik
  * @author gilbert.seilheimer[at]contic[dot]de Gilbert Seilheimer
  * @author <a href="http://www.contic.de">www.contic.de</a>
  *
@@ -12,56 +11,68 @@
 /**
  * piwik lib
  * @link https://github.com/piwik/piwik
- * @version 1.x
+ * @version 2.x
  */
 
 // AddOn-PIWIK
 
-   //////////////////////////////////////////////////////////////////////////////////
-   // CONFIG
-   //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
+    // CONFIG
+    //////////////////////////////////////////////////////////////////////////////////
 
-   // VARs
-   $page = "gs_piwik";
-   $page_root = $REX['INCLUDE_PATH'].'/addons/'.$page.'/';
+    // VARs
+    $mypage = "gs_piwik";
+    $mypage_root = $REX['INCLUDE_PATH'] . '/addons/' . $mypage . '/';
 
-   // VARs - ADDON
-   $REX['ADDON']['name'][$page]          = 'Piwik';
-   $REX['ADDON']['rxid'][$page]          = '622';
-   $REX['ADDON']['page'][$page]          = $page;
-   $REX['ADDON']['version'][$page]       = '1.0.9';
-   $REX['ADDON']['author'][$page]        = 'Gilbert Seilheimer';
-   $REX['ADDON']['supportpage'][$page]   = 'forum.redaxo.org';
-   $REX['ADDON']['perm'][$page]          = $page.'[]';
-   $REX['PERM'][]                        = $page.'[]';
-
-
-   if($REX['REDAXO'] && $REX['USER'])
-   {
-      //////////////////////////////////////////////////////////////////////////////////
-      // SUBPAGES
-      //////////////////////////////////////////////////////////////////////////////////
-
-      // Sprachdateien anhaengen
-      $I18N->appendFile($REX['INCLUDE_PATH'].'/addons/'.$page.'/lang/');
-
-      $REX['ADDON'][$page]['SUBPAGES'] =
-         //        subpage,    label,                                  perm,   params, attributes
-         array(
-             array('',           $I18N->msg($page.'_subpage_index'),      '',     '',     ''),
-             array('readme',     $I18N->msg($page.'_subpage_readme'),     '',     '',     '')
-         );
-
-      //////////////////////////////////////////////////////////////////////////////////
-      // INCLUDES
-      //////////////////////////////////////////////////////////////////////////////////
-      #require_once $addon_root.'.......inc.php';
+    // VARs - ADDON
+    $REX['ADDON']['name'][$mypage] = 'Piwik';
+    $REX['ADDON']['rxid'][$mypage] = '622';
+    $REX['ADDON']['page'][$mypage] = $mypage;
+    $REX['ADDON']['version'][$mypage] = '2.0.0';
+    $REX['ADDON']['author'][$mypage] = 'Gilbert Seilheimer';
+    $REX['ADDON']['supportpage'][$mypage] = 'forum.redaxo.org';
+    $REX['ADDON']['perm'][$mypage] = $mypage . '[]';
+    $REX['PERM'][] = $mypage . '[]';
 
 
-      //////////////////////////////////////////////////////////////////////////////////
-      // FUNCTIONS
-      //////////////////////////////////////////////////////////////////////////////////
+    if ($REX['REDAXO'] && $REX['USER']) {
 
-   }
+        //////////////////////////////////////////////////////////////////////////////////
+        // INCLUDES
+        //////////////////////////////////////////////////////////////////////////////////
 
-?>
+        #require_once($mypage_root .'/classes/class.rex_gs_piwik_utils.inc.php');
+
+
+        //////////////////////////////////////////////////////////////////////////////////
+        // FUNCTIONS
+        //////////////////////////////////////////////////////////////////////////////////
+
+        /*
+        // default settings (user settings are saved in data dir!)
+        $REX['ADDON'][$mypage]['settings'] = array(
+            'foo' => 'bar',
+            'foo2' => true,
+        );
+
+        // overwrite default settings with user settings
+        rex_gs_piwik_utils::includeSettingsFile();
+        */
+
+        //////////////////////////////////////////////////////////////////////////////////
+        // SUBPAGES
+        //////////////////////////////////////////////////////////////////////////////////
+
+        // Sprachdateien anhaengen
+        $I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/' . $mypage . '/lang/');
+
+        // add subpages
+        $REX['ADDON'][$mypage]['SUBPAGES'] =
+            //        subpage, label, perm, params, attributes
+            array(
+                array('', $I18N->msg($mypage . '_subpage_index'), '', '', ''),
+                array('readme', $I18N->msg($mypage . '_subpage_readme'), '', '', ''),
+                array('settings', $I18N->msg($mypage . '_subpage_settings'), '', '', '')
+            );
+
+    }

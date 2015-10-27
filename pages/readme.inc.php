@@ -1,20 +1,5 @@
 <?php
 
-/**
- * PIWIK
- *
- * @author gilbert.seilheimer[at]contic[dot]de Gilbert Seilheimer
- * @author <a href="http://www.contic.de">www.contic.de</a>
- *
- * @package redaxo4
- * @version svn:$Id$
- */
-/**
- * piwik lib
- * @link https://github.com/piwik/piwik
- * @version 1.x
- */
-
 // AddOn-PIWIK
 
    //////////////////////////////////////////////////////////////////////////////////

@@ -1,17 +1,17 @@
-﻿# addon:piwik de_de | de_de_utf8
+﻿# addon:gs_piwik de_de
 
 gs_piwik_name = Piwik
 
 gs_piwik_subpage_index = Startseite
 
 gs_piwik_subpage_index_txt_01 = Piwik - minimaler Aufwand...
-gs_piwik_subpage_index_txt_01_01 = Es sind keine externen Dateien einzubinden. Lediglich ist das Tempalte mit der ID=622 ensprechend anzupassen. Ein einfaches Copy'n'Paste vom PIWIK-Backend ist genug...
+gs_piwik_subpage_index_txt_01_01 = Es sind keine externen Dateien einzubinden. Lediglich ist das Tempalte mit der ID=xyz NAME="tpl : addon gs_piwik" ensprechend anzupassen. Ein einfaches Copy'n'Paste vom PIWIK-Backend ist genug...
 gs_piwik_subpage_index_txt_01_02 = Weitere Informationen finden Sie in Lies mich
 
 gs_piwik_subpage_readme = Lies mich
 
 gs_piwik_subpage_readme_txt_01 = Piwik - minimaler Aufwand...
-gs_piwik_subpage_readme_txt_01_01 = Es sind keine externen Dateien einzubinden. Lediglich ist das Tempalte mit der ID=622 ensprechend anzupassen. Ein einfaches Copy'n'Paste vom PIWIK-Backend ist genug...
+gs_piwik_subpage_readme_txt_01_01 = Es sind keine externen Dateien einzubinden. Lediglich ist das Tempalte mit der ID=xyz NAME="tpl : addon gs_piwik" ensprechend anzupassen. Ein einfaches Copy'n'Paste vom PIWIK-Backend ist genug...
 
 gs_piwik_subpage_readme_txt_02 = Piwik - JS-Funktionen
 gs_piwik_subpage_readme_txt_02_01 = SCRIPT-Tag-1: URL ...
@@ -27,7 +27,10 @@ gs_piwik_subpage_readme_txt_03_03 = a) diese Daten bekommen Sie von Ihrem Anbiet
 gs_piwik_subpage_readme_txt_03_04 = b) weitere Details zu PIWIK finden Sie unter: http://www.piwik.org
 
 gs_piwik_subpage_readme_txt_04 = Hinweise: Template löschen
-gs_piwik_subpage_readme_txt_04_01 = Das Löschen des Templates mit der ID=622 sollte nur durch die DEINSTALLATION des AddOns erfolgen.
+gs_piwik_subpage_readme_txt_04_01 = Das Löschen des Templates mit der ID=xyz NAME="tpl : addon gs_piwik" sollte nur durch die DEINSTALLATION des AddOns erfolgen.
 
-gs_piwik_subpage_readme_txt_05 = Hinweise: Installation/Einbindung des REX_TEMPLATE[622]
+gs_piwik_subpage_readme_txt_05 = Hinweise: Installation/Einbindung des REX_TEMPLATE[xyz]
 gs_piwik_subpage_readme_txt_05_01 = Das Template ist noch im HEAD-Tag des Standard-Artikels zu hinterlegen...
+
+gs_piwik_install_checkphpversion = Die PHP Version reicht nicht aus. Es wird mindestens Version 5.3 gebraucht. Im Moment ist Version {0} installiert.
+gs_piwik_install_redaxo_version_problem = Die REDAXO Version reicht nicht aus. Es wird mindestens Version {0} gebraucht.

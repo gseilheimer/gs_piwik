@@ -1,123 +1,96 @@
 <?php
 
 /**
- * PIWIK
- *
+ * gs_piwik
  * @author gilbert.seilheimer[at]contic[dot]de Gilbert Seilheimer
  * @author <a href="http://www.contic.de">www.contic.de</a>
- *
- * @package redaxo4
- * @version svn:$Id$
- */
-/**
- * piwik lib
- * @link https://github.com/piwik/piwik
- * @version 1.x
  */
 
 // AddOn-PIWIK
 
-	//////////////////////////////////////////////////////////////////////////////////
-	// CONFIG
-	//////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////
+   // CONFIG
+   //////////////////////////////////////////////////////////////////////////////////
 
-	// VARs
-	$page = "gs_piwik";
+   // VARs
+   $mypage = "gs_piwik";
 
-   // Installationsbedingungen pruefen
-   $page_check_rex = '4.5';
-   $page_check_php = 5;
-   #$page_check_addons = array('');
-   $page_check_status = true;
+   // MSG
+   $msg = '';
 
    //////////////////////////////////////////////////////////////////////////////////
    // CHECKS
    //////////////////////////////////////////////////////////////////////////////////
 
-   // REX VERSION
-   $page_check_rex = $REX['VERSION'].'.'.$REX['SUBVERSION'].'.'.$REX['MINORVERSION'] = "1";
-   if(version_compare($page_check_rex, $page_check_rex, '<'))
-   {
-      $REX['ADDON']['installmsg'][$page] = 'Dieses Addon ben&ouml;tigt Redaxo Version '.$page_check_rex.' oder h&ouml;her.';
-      $REX['ADDON']['install'][$page] = 0;
-      $page_check_status = false;
+   if ($REX['VERSION'] != '4' || $REX['SUBVERSION'] < '6') {
+      $msg = $I18N->msg('install_redaxo_version_problem', '4.6');
+
+   } elseif (version_compare(PHP_VERSION, '5.5.0', '<')) {
+      $msg = $I18N->msg('install_checkphpversion', PHP_VERSION);
+
    }
 
-   // PHP VERSION
-   if (intval(PHP_VERSION) < $page_check_php)
-   {
-      $REX['ADDON']['installmsg'][$page] = 'Dieses Addon ben&ouml;tigt mind. PHP '.$page_check_php.'!';
-      $REX['ADDON']['install'][$page] = 0;
-      $page_check_status = false;
-   }
-
-   // CHECK ADDONS
-   /*
-   foreach($page_check_addons as $a)
-   {
-      if (!OOAddon::isInstalled($a))
-      {
-         $REX['ADDON']['installmsg'][$page] = '<br />Addon "'.$a.'" ist nicht installiert.  >>> <a href="index.php?page=addon&addonname='.$a.'&install=1">jetzt installieren</a> <<<';
-         $page_check_status = false;
-      }
-      else
-      {
-         if (!OOAddon::isAvailable($a))
-         {
-            $REX['ADDON']['installmsg'][$page] = '<br />Addon "'.$a.'" ist nicht aktiviert.  >>> <a href="index.php?page=addon&addonname='.$a.'&activate=1">jetzt aktivieren</a> <<<';
-            $page_check_status = false;
-         }
-      }
-   }
-   */
-
-   //////////////////////////////////////////////////////////////////////////////////
-   // DUMP
-   //////////////////////////////////////////////////////////////////////////////////
-
-   # $uninstall = dirname(__FILE__) . '/uninstall.sql';
-   # rex_install_dump($uninstall);
-
-
-   //////////////////////////////////////////////////////////////////////////////////
-   // UPDATE/INSERT (DB)
-   //////////////////////////////////////////////////////////////////////////////////
-
-   $sql_table = $REX['TABLE_PREFIX']."template";
-
-   $sql = rex_sql::factory();
-   $sql->debugsql = 0; //Ausgabe Query
-   $sql->setQuery("SELECT * FROM $sql_table WHERE name LIKE '%addon gs_piwik (jquery)%'");
-   $sql_id = $sql->getValue('id');
-   $sql->setTable($sql_table);
-
-   if( $sql->getRows() )
-   {
-      $sql->setWhere('id = '.$sql_id);
-      $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n\r\n  var piwik_site_id = Z;\r\n  var piwik_site_url = \"SRV.DOMAIN.TLD\"\r\n\r\n  var _paq = _paq || [];\r\n  _paq.push([\'trackPageView\']);\r\n  _paq.push([\'enableLinkTracking\']);\r\n  (function() {\r\n    var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://\" + piwik_site_url +\"/\";\r\n    _paq.push([\'setTrackerUrl\', u+\'piwik.php\']);\r\n    _paq.push([\'setSiteId\', piwik_site_id]);\r\n    var d=document, g=d.createElement(\'script\'), s=d.getElementsByTagName(\'script\')[0]; g.type=\'text/javascript\';\r\n    g.defer=true; g.async=true; g.src=u+\'piwik.js\'; s.parentNode.insertBefore(g,s);\r\n  })();\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
-
-      if ( $sql->update() )
-      {
-         echo 'Zeile mit id '.$sql_id.' erfolgreich aktuallisiert.';
-      }
-   }
-   else
-   {
-      $sql->setValue("name", "addon gs_piwik (jquery)");
-      $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script type=\"text/javascript\">\r\n\r\n  var piwik_site_id = Z;\r\n  var piwik_site_url = \"SRV.DOMAIN.TLD\"\r\n\r\n  var _paq = _paq || [];\r\n  _paq.push([\'trackPageView\']);\r\n  _paq.push([\'enableLinkTracking\']);\r\n  (function() {\r\n    var u=((\"https:\" == document.location.protocol) ? \"https\" : \"http\") + \"://\" + piwik_site_url +\"/\";\r\n    _paq.push([\'setTrackerUrl\', u+\'piwik.php\']);\r\n    _paq.push([\'setSiteId\', piwik_site_id]);\r\n    var d=document, g=d.createElement(\'script\'), s=d.getElementsByTagName(\'script\')[0]; g.type=\'text/javascript\';\r\n    g.defer=true; g.async=true; g.src=u+\'piwik.js\'; s.parentNode.insertBefore(g,s);\r\n  })();\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
-
-      if ( $sql->insert() )
-      {
-         echo 'Zeile mit id '.$sql_id.' erfolgreich eingetragen.';
-      }
-   }
 
    //////////////////////////////////////////////////////////////////////////////////
    // INSTALL
    //////////////////////////////////////////////////////////////////////////////////
-   if ($page_check_status)
-   {
-      $REX['ADDON']['install'][$page] = TRUE;
+
+   if ($msg != '') {
+      $REX['ADDON']['installmsg'][$mypage] = $msg;
+
+   } else {
+
+      //////////////////////////////////////////////////////////////////////////////////
+      // UPDATE/INSERT (DB)
+      //////////////////////////////////////////////////////////////////////////////////
+
+      $sql = rex_sql::factory();
+
+      $sql->debugsql = 0; //Ausgabe Query
+
+      $sql_table = $REX['TABLE_PREFIX']."template";
+
+      $sql->setQuery("SELECT * FROM $sql_table WHERE name LIKE '%tpl : addon gs_piwik (js)%'");
+      $sql->setTable($sql_table);
+
+      if( $sql->getRows() != 0 )
+      {
+         $sql_id = $sql->getValue('id');
+         $sql->setWhere('id = '.$sql_id);
+         $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script>\r\n   var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://SRV.DOMAIN.TLD\" : \"http://SRV.DOMAIN.TLD/\");\r\n   document.write(unescape(\"%3Cscript src=\'\" + pkBaseURL + \"piwik.js\' type=\'text/javascript\'%3E%3C/script%3E\"));\r\n</script>\r\n\r\n<script>\r\n   var domain_website = window.location.hostname;\r\n   var id_website = PIWIK-ID; //Konstante für MultiDomain-Support\r\n\r\nif (domain_website == \"SRV.DOMAIN.TLD\") {\r\n   id_website = 1;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") {\r\n   id_website = 2;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") {\r\n   id_website = 3;\r\n}\r\n\r\ntry {\r\n   var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", id_website);\r\n   piwikTracker.trackPageView();\r\n   piwikTracker.enableLinkTracking();\r\n} \r\ncatch( err ) {\r\n}\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
+
+         if ( $sql->update() )
+         {
+            echo rex_info("Template mit ID : $sql_id erfolgreich aktuallisiert. <br />");
+         }
+      }
+      else
+      {
+         $sql->setValue("name", "tpl : addon gs_piwik (js)");
+         $sql->setValue("content", "<!-- GS:PIWIK-START -->\r\n<script>\r\n   var pkBaseURL = ((\"https:\" == document.location.protocol) ? \"https://SRV.DOMAIN.TLD\" : \"http://SRV.DOMAIN.TLD/\");\r\n   document.write(unescape(\"%3Cscript src=\'\" + pkBaseURL + \"piwik.js\' type=\'text/javascript\'%3E%3C/script%3E\"));\r\n</script>\r\n\r\n<script>\r\n   var domain_website = window.location.hostname;\r\n   var id_website = PIWIK-ID; //Konstante für MultiDomain-Support\r\n\r\nif (domain_website == \"SRV.DOMAIN.TLD\") {\r\n   id_website = 1;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") {\r\n   id_website = 2;\r\n}\r\nelse if (domain_website == \"SRV.DOMAIN.TLD\") {\r\n   id_website = 3;\r\n}\r\n\r\ntry {\r\n   var piwikTracker = Piwik.getTracker(pkBaseURL + \"piwik.php\", id_website);\r\n   piwikTracker.trackPageView();\r\n   piwikTracker.enableLinkTracking();\r\n} \r\ncatch( err ) {\r\n}\r\n</script>\r\n<!-- GS:PIWIK-ENDE -->");
+
+         if ( $sql->insert() )
+         {
+            echo rex_info("Template 'tpl : addon gs_piwik (js)' erfolgreich eingetragen. <br />");
+         }
+      }
+
+
+      //////////////////////////////////////////////////////////////////////////////////
+      // INSTALL - FINISHING
+      //////////////////////////////////////////////////////////////////////////////////
+
+      if ( $sql->hasError() ) {
+         $msg = 'MySQL-Error: ' . $sql->getErrno() . '<br />';
+         $msg .= $sql->getError();
+
+         $REX['ADDON']['install'][$mypage] = FALSE;
+         $REX['ADDON']['installmsg'][$mypage] = $msg;
+
+      } else {
+         $REX['ADDON']['install'][$mypage] = TRUE;
+
+      }
+
    }
 
-?>

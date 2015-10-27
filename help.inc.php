@@ -1,18 +1,9 @@
 <?php
 
 /**
- * PIWIK
- *
+ * gs_piwik
  * @author gilbert.seilheimer[at]contic[dot]de Gilbert Seilheimer
  * @author <a href="http://www.contic.de">www.contic.de</a>
- *
- * @package redaxo4
- * @version svn:$Id$
- */
-/**
- * piwik lib
- * @link https://github.com/piwik/piwik
- * @version 1.x
  */
 
 // AddOn-PIWIK
@@ -26,7 +17,7 @@
    <br />
    <h3>Benutzung:</h3>
    <p>
-      Der Website-LINK vom PIWIK-Backend muss in das Template 622 eingebunden werden...<br />
+      Der Website-LINK vom PIWIK-Backend muss in das Template xyz eingebunden werden...<br />
    </p>
 
    <br />
